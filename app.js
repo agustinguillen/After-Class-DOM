@@ -1,6 +1,6 @@
-//---------------------------------------------------APP DE PELICULAS - AFTECLASS DOM-----------------------------------------------------------------------------------------------------------------------------------------
+//------------------APP DE PELICULAS - AFTECLASS DOM--------------------//
 
-//--------------------------------------------------------Array de peliculas------------------------------------------------------------------------------------------------------------------------------
+//Array de peliculas
 let peliculas = [
     {id:1, nombre: 'Star Wars', genero: 'ciencia ficcion', anio: 1977, atp: true, img:'https://res.cloudinary.com/vaporbox/image/upload/v1625508101/afterclass/ahT4ObS7XKedQkOSpGr1wQ97aKA_s86oek.jpg'},
     {id:2, nombre: 'Nobody', genero: 'accion', anio: 2021, atp: false, img:'https://res.cloudinary.com/vaporbox/image/upload/v1625508101/afterclass/ddO5a3tMPpQutSDQO1bESgLWadB_nsr7h6.jpg'},
@@ -19,6 +19,7 @@ let peliculas = [
     {id:15, nombre: 'Rey León', genero: 'animacion', anio: 1994, atp: true, img:'https://res.cloudinary.com/vaporbox/image/upload/v1625541034/afterclass/b0MxU37dNmMwKtoPVYPKOZSIrIn_xx4f3x.jpg'},
     {id:16, nombre: 'Jurassic Park', genero: 'ciencia ficcion', anio: 1993, atp: false, img:'https://res.cloudinary.com/vaporbox/image/upload/v1625541181/afterclass/1r8TWaAExHbFRzyqT3Vcbq1XZQb_jotm6u.jpg'},
 ]
+
 //Variables
 let atp
 let edad = Number(prompt('Cual es tu edad?'))
@@ -31,7 +32,7 @@ let titulo = document.createElement('h1')
 titulo.setAttribute('class', 'text-center mt-5')
 body.prepend(titulo)
 
-//FUNCIONES
+//Funciones
 function crearTarjetasHTML(filtradas){
     let peliculasFiltradas = filtradas
     for(const pelicula of peliculasFiltradas){
@@ -59,13 +60,20 @@ function darEstilo(atp){
 }
 
 function filtrarPorAnio(){
-    resultado.innerHTML = ''
+    removeAllChildNodes(resultado)
     let filtro = Number(prompt('Desde que año te gustaría buscar?'))
     let peliculasFiltradas = peliculas.filter(pelicula => pelicula.anio >= filtro)
     crearTarjetasHTML(peliculasFiltradas)
     titulo.textContent = `Peliculas posteriores a ${filtro}`
 }
 
+function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
+
+//Ejecución
 if(edad >= 13){
     atp = false
     titulo.textContent = 'Todas las peliculas'
@@ -83,4 +91,4 @@ if(preguntar){
 
 darEstilo(atp)
 
-document.getElementById('movie3').style.backgroundColor = 'red'
+//document.getElementById('movie3').style.backgroundColor = 'red'
