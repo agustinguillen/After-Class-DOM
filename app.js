@@ -1,4 +1,4 @@
-//---------------------------------------------------App de Peliculas-----------------------------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------APP DE PELICULAS - AFTECLASS DOM-----------------------------------------------------------------------------------------------------------------------------------------
 
 //--------------------------------------------------------Array de peliculas------------------------------------------------------------------------------------------------------------------------------
 let peliculas = [
@@ -19,28 +19,19 @@ let peliculas = [
     {id:15, nombre: 'Rey León', genero: 'animacion', anio: 1994, atp: true, img:'https://res.cloudinary.com/vaporbox/image/upload/v1625541034/afterclass/b0MxU37dNmMwKtoPVYPKOZSIrIn_xx4f3x.jpg'},
     {id:16, nombre: 'Jurassic Park', genero: 'ciencia ficcion', anio: 1993, atp: false, img:'https://res.cloudinary.com/vaporbox/image/upload/v1625541181/afterclass/1r8TWaAExHbFRzyqT3Vcbq1XZQb_jotm6u.jpg'},
 ]
-//------------------------------------------------------------Clase pelicula si quieren crear nuevas------------------------------------------------------------------------------------------------------
-class Pelicula {
-    constructor(id, nombre, genero, anio, atp, img){
-        this.id = id,
-        this.nombre = nombre,
-        this.genero = genero,
-        this.anio = anio,
-        this.atp = atp,
-        this.img = img
-    }
-}
-//-------------------------------------------------------Variables y elementos creados--------------------------------------------------------------------------------------------------------------------
+//Variables
 let atp
 let edad = Number(prompt('Cual es tu edad?'))
-let preguntar = confirm('Queres filtrar por año?')
-let contenedor = document.getElementById('contenedor')
+let preguntar = confirm('Querés filtrar por año?')
+
+//Elementos del DOM
+const body = document.body
 let resultado = document.querySelector('#resultado')
 let titulo = document.createElement('h1')
 titulo.setAttribute('class', 'text-center mt-5')
-contenedor.prepend(titulo)
+body.prepend(titulo)
 
-//-------------------------------------------------------Funciones--------------------------------------------------------------------------
+//FUNCIONES
 function crearTarjetasHTML(filtradas){
     let peliculasFiltradas = filtradas
     for(const pelicula of peliculasFiltradas){
@@ -56,9 +47,9 @@ function crearTarjetasHTML(filtradas){
 
 function darEstilo(atp){
     if(!atp){
-        document.body.setAttribute('style', 'background-color: #000546; color: whitesmoke')
+        body.setAttribute('style', 'background-color: #00006A; color: whitesmoke')
     }else if(atp){
-        document.body.setAttribute('style', 'background-color: #9BDA00;')
+        body.setAttribute('style', 'background-color: #00DD00')
     }
 
     let cards = document.getElementsByClassName('card')
@@ -72,15 +63,10 @@ function filtrarPorAnio(){
     let filtro = Number(prompt('Desde que año te gustaría buscar?'))
     let peliculasFiltradas = peliculas.filter(pelicula => pelicula.anio >= filtro)
     crearTarjetasHTML(peliculasFiltradas)
-    titulo.textContent = `Películas posteriores a ${filtro}`
+    titulo.textContent = `Peliculas posteriores a ${filtro}`
 }
 
-
-
-
-peliculas.push(new Pelicula(17, 'Deadpool', 'aventura', 2016, false, 'https://res.cloudinary.com/vaporbox/image/upload/v1625508101/afterclass/pcZT1Ouq99dY6J2iGXjMxw16x6o_d9ifqk.jpg'))
-
-if(edad >= 14){
+if(edad >= 13){
     atp = false
     titulo.textContent = 'Todas las peliculas'
     crearTarjetasHTML(peliculas)
@@ -97,4 +83,4 @@ if(preguntar){
 
 darEstilo(atp)
 
-//titulo.parentNode.removeChild(titulo)
+document.getElementById('movie3').style.backgroundColor = 'red'
