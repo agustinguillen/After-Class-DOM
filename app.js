@@ -34,6 +34,7 @@ class Pelicula {
 let atp
 let edad = Number(prompt('Cual es tu edad?'))
 let preguntar = confirm('Queres filtrar por año?')
+let contenedor = document.getElementById('contenedor')
 let resultado = document.querySelector('#resultado')
 let titulo = document.createElement('h1')
 titulo.setAttribute('class', 'text-center mt-5')
