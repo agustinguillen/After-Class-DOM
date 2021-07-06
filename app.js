@@ -8,7 +8,7 @@ let atp
 let resultado = document.getElementById('resultado')
 let titulo = document.getElementById('titulo')
 
-//---------------------------------------------------Clases-----------------------------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------Peliculas-----------------------------------------------------------------------------------------------------------------------------------------
 
 let peliculas = [
     {id:1, nombre: 'Star Wars', genero: 'ciencia ficcion', anio: 1977, atp: true, img:'https://res.cloudinary.com/vaporbox/image/upload/v1625508101/afterclass/ahT4ObS7XKedQkOSpGr1wQ97aKA_s86oek.jpg'},
