@@ -56,14 +56,15 @@ function darEstilo(atp){
     for(const card of cards){
         card.setAttribute('style', 'width: 13rem; background-color: black; color: whitesmoke; margin: 2.2rem')
     }
-    console.log(cards)
+
+   
 }
 
 //Función para filtrar por el año que ingrese el usuario
 function filtrarPorAnio(){
     removeAllChildNodes(resultado)
     let filtro = prompt('Desde que año te gustaría buscar?').toString()
-    let peliculasFiltradas = peliculas.filter(pelicula => pelicula.nombre === filtro)
+    let peliculasFiltradas = peliculas.filter(pelicula => pelicula.anio >= filtro)
     crearTarjetasHTML(peliculasFiltradas)
     titulo.textContent = `Peliculas posteriores a ${filtro}`
 }
@@ -80,6 +81,9 @@ if(edad >= 13){
     atp=false
     titulo.textContent= 'Todas las películas'
     crearTarjetasHTML(peliculas)
+
+    
+
 }else{
     atp=true
     titulo.textContent= 'Películas para vos'
@@ -94,8 +98,10 @@ if(preguntar){
 
 darEstilo(atp)
 
-//Seleccione mediante el id que cree dinámicamente en la función crearTarjetasHTML para modificar el color de una tarjeta en específico
-document.getElementById('movie3').style.backgroundColor = 'red'
+if(!atp){
+    //Seleccione mediante el id que cree dinámicamente en la función crearTarjetasHTML para modificar el color de una tarjeta en específico
+    document.getElementById('movie3').style.backgroundColor = 'red'
+}
 
 /*removeChild() borra el nodo child que yo le pase del parent que seleccioné en este caso body*/
 //body.removeChild(resultado)
