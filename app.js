@@ -20,19 +20,19 @@ let peliculas = [
     {id:16, nombre: 'Jurassic Park', genero: 'ciencia ficcion', anio: 1993, atp: false, img:'https://res.cloudinary.com/vaporbox/image/upload/v1625541181/afterclass/1r8TWaAExHbFRzyqT3Vcbq1XZQb_jotm6u.jpg'},
 ]
 
-//Variables
-let atp
-let edad = Number(prompt('Cual es tu edad?'))
+let edad= Number(prompt('Cual es tu edad?'))
 let preguntar = confirm('Querés filtrar por año?')
-
-//Elementos del DOM
+let atp //boolean
 const body = document.body
-let resultado = document.querySelector('#resultado')
+//Div de id="resultado"
+let resultado = document.getElementById('resultado')
+resultado.setAttribute('class', 'col-lg-10 offset-1 d-flex flex-wrap justify-content-start text-center')
+//Elemento título
 let titulo = document.createElement('h1')
 titulo.setAttribute('class', 'text-center mt-5')
 body.prepend(titulo)
 
-//Funciones
+//Función que crea las tarjetas HTML de cada película de mi array peliculas
 function crearTarjetasHTML(filtradas){
     let peliculasFiltradas = filtradas
     for(const pelicula of peliculasFiltradas){
@@ -40,55 +40,65 @@ function crearTarjetasHTML(filtradas){
                                     <img src=${pelicula.img} class="card-img-top">
                                     <div class="card-body">
                                         <h5 class="card-title">${pelicula.nombre}</h5>
-                                        <p class="card-text">Género: ${pelicula.genero} <br> Año: ${pelicula.anio} <br> ATP: ${pelicula.atp}</p>
+                                        <p class="card-text">Genero: ${pelicula.genero} <br> Año: ${pelicula.anio} <br> ATP: ${pelicula.atp}</p>
                                     </div>
                                 </div>`
     }
 }
-
+//Función para dar estilo a las tarjetas y para modificar dependiendo si es mayor o menor de 13 años
 function darEstilo(atp){
     if(!atp){
-        body.setAttribute('style', 'background-color: #00006A; color: whitesmoke')
+        body.setAttribute('style', 'background-color: #000A5C; color: whitesmoke')
     }else if(atp){
-        body.setAttribute('style', 'background-color: #00DD00')
+        body.setAttribute('style', 'background-color: #1CCF00')
     }
-
     let cards = document.getElementsByClassName('card')
     for(const card of cards){
         card.setAttribute('style', 'width: 13rem; background-color: black; color: whitesmoke; margin: 2.2rem')
     }
+    console.log(cards)
 }
 
+//Función para filtrar por el año que ingrese el usuario
 function filtrarPorAnio(){
     removeAllChildNodes(resultado)
-    let filtro = Number(prompt('Desde que año te gustaría buscar?'))
-    let peliculasFiltradas = peliculas.filter(pelicula => pelicula.anio >= filtro)
+    let filtro = prompt('Desde que año te gustaría buscar?').toString()
+    let peliculasFiltradas = peliculas.filter(pelicula => pelicula.nombre === filtro)
     crearTarjetasHTML(peliculasFiltradas)
     titulo.textContent = `Peliculas posteriores a ${filtro}`
 }
 
+//Funcion para borrar todos los nodos child (hijos) del elemento parent que le pase por el atributo. firstChild siempre me devuelve el primer child del nodo que especifique
 function removeAllChildNodes(parent) {
     while (parent.firstChild) {
         parent.removeChild(parent.firstChild);
     }
 }
 
-//Ejecución
+//Si la persona es mayor de 13 o tiene 13 años cambio el valor de atp, cambio el título y le paso mi array de peliculas completo (si es mayor) o filtrado por atp (si es menor)
 if(edad >= 13){
-    atp = false
-    titulo.textContent = 'Todas las peliculas'
+    atp=false
+    titulo.textContent= 'Todas las películas'
     crearTarjetasHTML(peliculas)
 }else{
-    atp = true
-    titulo.textContent = 'Peliculas para vos'
+    atp=true
+    titulo.textContent= 'Películas para vos'
     peliculas = peliculas.filter(pelicula => pelicula.atp === true)
     crearTarjetasHTML(peliculas)
 }
 
+//Si en el confirm() preguntar da ok me ejecuta la función filtrar por año
 if(preguntar){
     filtrarPorAnio()
 }
 
 darEstilo(atp)
 
-//document.getElementById('movie3').style.backgroundColor = 'red'
+//Seleccione mediante el id que cree dinámicamente en la función crearTarjetasHTML para modificar el color de una tarjeta en específico
+document.getElementById('movie3').style.backgroundColor = 'red'
+
+/*removeChild() borra el nodo child que yo le pase del parent que seleccioné en este caso body*/
+//body.removeChild(resultado)
+
+/*remove() elimina el nodo que seleccioné en este caso resultado*/
+//resultado.remove()
